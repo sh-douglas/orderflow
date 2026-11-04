@@ -18,5 +18,14 @@ build-backend = "poetry.core.masonry.api"
 [dependency-groups]
 dev = [
     "ruff (>=0.17.3,<0.18.0)",
-    "taskipy (>=1.14.1,<2.0.0)"
+    "taskipy (>=1.14.1,<2.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)"
 ]
+
+
+[tool.taskipy.tasks]
+lint = "ruff check . && ruff format --check ."
+format = "ruff check . --fix && ruff format ."
+pre_test = "ruff check . --fix && ruff format --check ."
+test = "pytest -vv --cov=app --cov-report=term-missing --cov-report=html"
+run = "fastapi run"
