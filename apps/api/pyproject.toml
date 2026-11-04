@@ -7,7 +7,8 @@ authors = [
 ]
 requires-python = ">=3.13,<4.0"
 dependencies = [
-    "fastapi[standard] (>=0.162.0,<0.163.0)"
+    "fastapi[standard] (>=0.162.0,<0.163.0)",
+    "pytest-asyncio (>=1.4.1.post1,<2.0.0)"
 ]
 
 
@@ -29,3 +30,6 @@ format = "ruff check . --fix && ruff format ."
 pre_test = "ruff check . --fix && ruff format --check ."
 test = "pytest -vv --cov=app --cov-report=term-missing --cov-report=html"
 run = "fastapi run"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
