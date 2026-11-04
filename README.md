@@ -35,6 +35,7 @@ O projeto utiliza as seguintes tecnologias:
 | Documento                                                    | Descrição                                                                                                |
 | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | [PostgreSQL — Ambiente de Desenvolvimento](docs/database.md) | Instruções para configuração, inicialização e gerenciamento do banco de dados utilizando Docker Compose. |
+| [PostgreSQL — Ambiente de Desenvolvimento](docs/backup.md)   | Instruções para realizar backups e restaurar bancos de dados PostgreSQL do **OrderFlow**.                |
 
 ## Status do projeto
 
