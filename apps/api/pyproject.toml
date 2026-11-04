@@ -1,0 +1,22 @@
+[project]
+name = "overflow-api"
+version = "0.1.0"
+description = "Backend API for the Overflow platform, built with FastAPI."
+authors = [
+    {name = "SenhorDosSonhos1",email = "marcelosamu2002@gmail.com"}
+]
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "fastapi[standard] (>=0.162.0,<0.163.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.17.3,<0.18.0)",
+    "taskipy (>=1.14.1,<2.0.0)"
+]
