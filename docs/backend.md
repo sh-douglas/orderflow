@@ -1,22 +1,22 @@
-# Overflow API
+# OrderFlow API
 
-Backend da plataforma **Overflow**, desenvolvido em Python com FastAPI, seguindo uma abordagem assíncrona.
+Backend da plataforma **OrderFlow**, desenvolvido em Python com FastAPI, seguindo uma abordagem assíncrona.
 
 Este documento apresenta a estrutura da aplicação, as tecnologias utilizadas e os procedimentos para configuração, execução e testes do ambiente de desenvolvimento.
 
 ## Tecnologias
 
-| Tecnologia | Finalidade |
-|---|---|
-| Python 3.13+ | Linguagem principal |
-| FastAPI | Framework para desenvolvimento da API |
-| Poetry | Gerenciamento de dependências e ambiente virtual |
-| Ruff | Análise estática e formatação do código |
-| Taskipy | Automação de tarefas de desenvolvimento |
-| Pytest | Framework de testes automatizados |
-| pytest-asyncio | Suporte à execução de testes assíncronos |
-| HTTPX | Cliente HTTP para testes da aplicação |
-| pytest-cov | Análise de cobertura de código |
+| Tecnologia     | Finalidade                                       |
+| -------------- | ------------------------------------------------ |
+| Python 3.13+   | Linguagem principal                              |
+| FastAPI        | Framework para desenvolvimento da API            |
+| Poetry         | Gerenciamento de dependências e ambiente virtual |
+| Ruff           | Análise estática e formatação do código          |
+| Taskipy        | Automação de tarefas de desenvolvimento          |
+| Pytest         | Framework de testes automatizados                |
+| pytest-asyncio | Suporte à execução de testes assíncronos         |
+| HTTPX          | Cliente HTTP para testes da aplicação            |
+| pytest-cov     | Análise de cobertura de código                   |
 
 ## Estrutura do backend
 
@@ -81,10 +81,10 @@ poetry run fastapi dev app/main.py
 
 Após iniciar o servidor, os seguintes endereços estarão disponíveis:
 
-| Recurso | Endereço |
-|---|---|
-| API | http://127.0.0.1:8000 |
-| Swagger UI | http://127.0.0.1:8000/docs |
+| Recurso        | Endereço                           |
+| -------------- | ---------------------------------- |
+| API            | http://127.0.0.1:8000              |
+| Swagger UI     | http://127.0.0.1:8000/docs         |
 | OpenAPI Schema | http://127.0.0.1:8000/openapi.json |
 
 ## Endpoints
@@ -109,12 +109,12 @@ Ele não verifica conexões com banco de dados ou a disponibilidade de serviços
 
 Os comandos de desenvolvimento são centralizados pelo Taskipy e configurados no `pyproject.toml`.
 
-| Comando | Descrição |
-|---|---|
-| `poetry run task run` | Inicia a API sem recarregamento automático |
-| `poetry run task lint` | Verifica problemas de lint e formatação |
-| `poetry run task format` | Aplica correções automáticas e formatação |
-| `poetry run task test` | Executa os testes e gera relatórios de cobertura |
+| Comando                  | Descrição                                        |
+| ------------------------ | ------------------------------------------------ |
+| `poetry run task run`    | Inicia a API sem recarregamento automático       |
+| `poetry run task lint`   | Verifica problemas de lint e formatação          |
+| `poetry run task format` | Aplica correções automáticas e formatação        |
+| `poetry run task test`   | Executa os testes e gera relatórios de cobertura |
 
 ### Qualidade de código
 
@@ -156,10 +156,10 @@ O projeto utiliza **pytest-cov** para medir quais instruções da aplicação fo
 
 A execução gera dois formatos de relatório:
 
-| Relatório | Descrição |
-|---|---|
+| Relatório                 | Descrição                                                   |
+| ------------------------- | ----------------------------------------------------------- |
 | Terminal (`term-missing`) | Exibe a porcentagem de cobertura e as linhas não executadas |
-| HTML (`html`) | Permite visualizar a cobertura detalhada por arquivo |
+| HTML (`html`)             | Permite visualizar a cobertura detalhada por arquivo        |
 
 O relatório HTML é gerado em:
 
