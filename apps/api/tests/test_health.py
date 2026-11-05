@@ -1,5 +1,6 @@
 from fastapi import status
 
+
 async def test_health(client):
     response = await client.get("/health")
 
