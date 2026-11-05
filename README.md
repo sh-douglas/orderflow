@@ -8,14 +8,16 @@ O sistema está sendo desenvolvido com foco em simplicidade, organização e fac
 
 ## Tecnologias
 
-O projeto utiliza as seguintes tecnologias:
-
 ### Backend
 
 - **Python** — Linguagem de programação.
 - **FastAPI** — Framework para desenvolvimento da API REST.
+- **Poetry** — Gerenciamento de dependências e ambiente virtual.
+- **Ruff** — Análise estática e formatação de código.
+- **Pytest** — Testes automatizados.
+- **Taskipy** — Automação de tarefas de desenvolvimento.
 
-### Frontend
+### Frontend (planejado)
 
 - **React** — Biblioteca para construção da interface.
 - **TypeScript** — Linguagem utilizada no desenvolvimento do frontend.
@@ -27,18 +29,57 @@ O projeto utiliza as seguintes tecnologias:
 ### Infraestrutura
 
 - **Docker** — Containerização dos serviços.
-- **Docker Compose** — Orquestração dos containers no ambiente de desenvolvimento.
+- **Docker Compose** — Gerenciamento dos containers no ambiente de desenvolvimento.
 - **GitHub Actions** — Integração contínua e automação de verificações (planejado).
+
+## Estrutura do projeto
+
+O OrderFlow utiliza uma estrutura de monorepositório, centralizando aplicações, infraestrutura e documentação.
+
+```text
+orderflow/
+├── .github/          # Templates de Issues e Pull Requests
+├── apps/
+│   └── api/          # Backend FastAPI
+├── docs/             # Documentação técnica
+├── .env.example      # Exemplo de variáveis de ambiente
+├── compose.yml       # Ambiente PostgreSQL
+├── CONTRIBUTING.md   # Diretrizes de contribuição
+└── README.md
+```
+
+A estrutura será expandida conforme o desenvolvimento das aplicações e dos serviços de infraestrutura.
 
 ## Documentação
 
-| Documento                                                    | Descrição                                                                                                |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| [PostgreSQL — Ambiente de Desenvolvimento](docs/database.md) | Instruções para configuração, inicialização e gerenciamento do banco de dados utilizando Docker Compose. |
-| [PostgreSQL — Ambiente de Desenvolvimento](docs/backup.md)   | Instruções para realizar backups e restaurar bancos de dados PostgreSQL do **OrderFlow**.                |
+| Documento                                                    | Descrição                                                                              |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| [PostgreSQL — Ambiente de Desenvolvimento](docs/database.md) | Configuração, inicialização e gerenciamento do PostgreSQL com Docker Compose.          |
+| [PostgreSQL — Backup e Restauração](docs/backup.md)          | Procedimentos para backup, verificação e restauração de bancos de dados PostgreSQL.    |
+| [Backend — FastAPI](docs/backend.md)                         | Configuração, execução, ferramentas de desenvolvimento e testes automatizados da API.  |
+| [Guia de Contribuição](CONTRIBUTING.md)                      | Convenções de branches, commits, Issues, Pull Requests e boas práticas de colaboração. |
 
 ## Status do projeto
 
 **Em desenvolvimento.**
 
-Atualmente, o projeto está em sua fase inicial, com a infraestrutura do banco de dados configurada e documentada. As aplicações backend e frontend serão desenvolvidas progressivamente.
+O OrderFlow encontra-se em fase inicial, com a infraestrutura do banco de dados configurada e o backend em desenvolvimento.
+
+| Componente           | Estado atual                                                               |
+| -------------------- | -------------------------------------------------------------------------- |
+| PostgreSQL           | Configurado com Docker Compose, persistência de dados e healthcheck.       |
+| Backup e restauração | Procedimentos manuais documentados e validados.                            |
+| Backend FastAPI      | Estrutura inicial implementada, endpoint `/health` e testes automatizados. |
+| Frontend React       | Planejado.                                                                 |
+| GitHub Actions       | Planejado.                                                                 |
+| Documentação         | Guias técnicos e diretrizes de contribuição disponíveis.                   |
+
+### Próximas etapas
+
+- Implementação dos módulos de negócio e integração do backend com PostgreSQL.
+- Containerização da API FastAPI.
+- Configuração de integração contínua com GitHub Actions.
+- Desenvolvimento do frontend React.
+- Preparação dos ambientes de implantação.
+
+O desenvolvimento seguirá de forma incremental, priorizando organização, qualidade de código e facilidade de manutenção.

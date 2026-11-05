@@ -1,7 +1,7 @@
 [project]
-name = "overflow-api"
+name = "orderflow-api"
 version = "0.1.0"
-description = "Backend API for the Overflow platform, built with FastAPI."
+description = "Backend API for the OrderFlow platform, built with FastAPI."
 authors = [
     {name = "SenhorDosSonhos1",email = "marcelosamu2002@gmail.com"}
 ]
