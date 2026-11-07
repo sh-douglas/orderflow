@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Testes e cobertura
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+tests/
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Git
+.git/
