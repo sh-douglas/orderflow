@@ -1,11 +1,19 @@
-.venv/	
-__pycache__/	
+# Python
+.venv/
+__pycache__/
 *.pyc
+
+# Testes e cobertura
 .pytest_cache/
-.ruff_cache/	
-.coverage	
-htmlcov/	
-.env	
-.env.*
-.git/	
+.ruff_cache/
+.coverage
+htmlcov/
 tests/
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Git
+.git/
