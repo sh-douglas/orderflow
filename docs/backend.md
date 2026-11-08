@@ -17,18 +17,34 @@ Este documento apresenta a estrutura da aplicação, as tecnologias utilizadas e
 | pytest-asyncio | Suporte à execução de testes assíncronos         |
 | HTTPX          | Cliente HTTP para testes da aplicação            |
 | pytest-cov     | Análise de cobertura de código                   |
-
+| PostgreSQL | Banco de dados relacional |
+| SQLAlchemy Async | ORM e gerenciamento de conexões e sessões assíncronas |
+| asyncpg | Driver assíncrono para PostgreSQL |
+| Alembic | Gerenciamento e versionamento de migrations |
+| Pydantic Settings | Gerenciamento das configurações da aplicação |
 ## Estrutura do backend
 
 ```text
 apps/api/
+├── alembic/
+│   ├── versions/
+│   └── env.py
 ├── app/
 │   ├── __init__.py
+│   ├── core/
+│   │   └── config.py
+│   ├── db/
+│   │   ├── base.py
+│   │   └── database.py
 │   └── main.py
 ├── tests/
 │   ├── conftest.py
+│   ├── test_database_connection.py
+│   ├── test_database_session.py
 │   └── test_health.py
+├── alembic.ini
 ├── pyproject.toml
+└── poetry.lockml
 └── poetry.lock
 ```
 
@@ -40,6 +56,11 @@ apps/api/
 - `tests/conftest.py`: centraliza as fixtures compartilhadas.
 - `pyproject.toml`: define dependências e configurações das ferramentas.
 - `poetry.lock`: registra as versões resolvidas das dependências.
+- `app/core/config.py`: centraliza as configurações da aplicação.
+- `app/db/base.py`: define a base declarativa dos modelos ORM.
+- `app/db/database.py`: configura a engine e as sessões assíncronas do SQLAlchemy.
+- `alembic/`: contém a configuração e o histórico de migrations do banco de dados.
+- `alembic.ini`: arquivo de configuração do Alembic.
 
 A estrutura será expandida conforme novos módulos e funcionalidades forem implementados.
 
@@ -105,6 +126,42 @@ Esse endpoint confirma que a aplicação está respondendo às requisições HTT
 
 Ele não verifica conexões com banco de dados ou a disponibilidade de serviços externos.
 
+## Persistência de dados
+
+O backend utiliza PostgreSQL com SQLAlchemy Async e o driver `asyncpg` para comunicação assíncrona com o banco de dados.
+
+As configurações de conexão são centralizadas em `app/core/config.py`, utilizando Pydantic Settings.
+
+O módulo `app/db/database.py` disponibiliza a engine assíncrona, a fábrica de sessões `AsyncSessionLocal` e a dependência `get_db`.
+
+A base declarativa dos futuros modelos ORM é definida em `app/db/base.py`.
+
+### Migrations com Alembic
+
+O Alembic é responsável pelo versionamento das alterações na estrutura do banco de dados.
+
+A configuração utiliza SQLAlchemy Async e possui uma migration inicial, que estabelece o histórico de revisões do projeto.
+
+Para aplicar as migrations:
+
+```bash
+poetry run alembic upgrade head
+```
+
+Para verificar a revisão atual:
+
+```bash
+poetry run alembic current
+```
+
+Para consultar o histórico:
+
+```bash
+poetry run alembic history
+```
+
+As futuras migrations serão adicionadas conforme a implementação dos modelos ORM.
+
 ## Comandos de desenvolvimento
 
 Os comandos de desenvolvimento são centralizados pelo Taskipy e configurados no `pyproject.toml`.
@@ -142,6 +199,24 @@ O HTTPX permite realizar requisições diretamente à aplicação FastAPI utiliz
 
 As fixtures compartilhadas são definidas em `tests/conftest.py`, permitindo reutilizar recursos entre os testes.
 
+### Testes de integração
+
+O backend possui testes de integração para validar a conexão com PostgreSQL e o funcionamento das sessões assíncronas do SQLAlchemy.
+
+Os testes são identificados pelo marcador `integration` do Pytest.
+
+Para executar somente os testes de integração:
+
+```bash
+poetry run pytest -m integration -v
+```
+
+Os testes utilizam um banco PostgreSQL separado do banco de desenvolvimento, configurado por meio das variáveis de ambiente.
+
+O arquivo `tests/conftest.py` também contém uma fixture para liberar as conexões da engine entre os testes, evitando problemas de reutilização de conexões entre diferentes event loops.
+
+A limpeza transacional automática dos dados ainda não foi implementada.
+
 ### Executar testes
 
 ```bash
@@ -175,6 +250,6 @@ Os relatórios são atualizados a cada execução que conclui a geração da cob
 
 ## Estado da implementação
 
-O backend encontra-se em fase inicial de desenvolvimento, com a estrutura FastAPI, um endpoint de verificação de saúde, ferramentas de qualidade de código e testes automatizados assíncronos.
+O backend encontra-se em fase inicial de desenvolvimento, com a estrutura FastAPI, endpoint de verificação de saúde, ferramentas de qualidade de código, testes automatizados e infraestrutura inicial de persistência com PostgreSQL, SQLAlchemy Async e Alembic.
 
-A persistência de dados, os módulos de negócio e as integrações externas serão incorporados conforme a evolução da plataforma.
+A configuração assíncrona do banco de dados, a migration inicial e os testes de integração estão implementados. Os modelos de negócio e as integrações externas serão incorporados conforme a evolução da plataforma.
