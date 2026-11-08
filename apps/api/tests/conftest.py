@@ -3,22 +3,21 @@ import os
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from app.db.database import engine
-
-
-@pytest.fixture(autouse=True)
-async def dispose_engine_after_test():
-    yield
-    await engine.dispose()
-
-
 os.environ.setdefault("POSTGRES_USER", "test")
 os.environ.setdefault("POSTGRES_PASSWORD", "test123")
 os.environ.setdefault("POSTGRES_DB", "orderflow_test")
 os.environ.setdefault("POSTGRES_HOST", "localhost")
 os.environ.setdefault("POSTGRES_PORT", "5435")
 
+
+from app.db.database import engine
 from app.main import app
+
+
+@pytest.fixture(autouse=True)
+async def dispose_engine_after_test():
+    yield
+    await engine.dispose()
 
 
 @pytest.fixture
