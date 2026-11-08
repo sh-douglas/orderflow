@@ -3,7 +3,17 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL
 
-ROOT_DIR = Path(__file__).resolve().parents[4]
+
+def find_env_file():
+    diretorio = Path(__file__).resolve().parent
+    diretorios = [diretorio, *diretorio.parents]
+
+    for diretorio in diretorios:
+        arquivo = diretorio / ".env"
+        if arquivo.is_file():
+            return arquivo
+
+    return None
 
 
 class Settings(BaseSettings):
@@ -14,7 +24,7 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str = "localhost"
 
     model_config = SettingsConfigDict(
-        env_file=ROOT_DIR / ".env",
+        env_file=find_env_file(),
         extra="ignore",
     )
 
